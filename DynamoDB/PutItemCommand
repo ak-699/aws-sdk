@@ -1,0 +1,42 @@
+import { DynamoDBClient, PutItemCommand } from "@aws-sdk/client-dynamodb"
+
+const client = new DynamoDBClient();
+
+export const handler = async (event) => {
+    const input = {
+        "Item": {
+          "AlbumTitle": {
+            "S": "Somewhat Famous"
+          },
+          "Artist": {
+            "S": "No One You Know"
+          },
+          "SongTitle": {
+            "S": "Call Me Today"
+          }
+        },
+        "ReturnConsumedCapacity": "TOTAL",
+        "TableName": "Music"
+      };
+      // "TableName" and "Item" are required 
+      // notice in item , each attribute is a object and has its type as a property 
+      /* attribute: {
+        "S": "value",
+      */
+      const command = new PutItemCommand(input);
+      const response = await client.send(command);
+};
+
+/* response ==
+{
+  "ConsumedCapacity": {
+    "CapacityUnits": 1,
+    "TableName": "Music"
+  }
+}
+*/
+
+/* 
+for detailed information visit
+site: https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/dynamodb/command/PutItemCommand/
+*/
