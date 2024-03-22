@@ -1,0 +1,43 @@
+import { DynamoDBClient, PutItemCommand } from "@aws-sdk/client-dynamodb"
+
+const client = new DynamoDBClient();
+
+export const handler = async (event) => {
+    // This example retrieves an item from the Music table. The table has a partition key and a sort key (Artist and SongTitle), so you must specify both of these attributes.
+    const input = {
+        "Key": {
+            "Artist": {
+                "S": "Acme Band"
+            },
+            "SongTitle": {
+                "S": "Happy Day"
+            }
+        },
+        "TableName": "Music"
+    };
+    // key and table name are required
+    const command = new GetItemCommand(input);
+    const response = await client.send(command);
+/* response ==
+{
+  "Item": {
+    "AlbumTitle": {
+      "S": "Songs About Life"
+    },
+    "Artist": {
+      "S": "Acme Band"
+    },
+    "SongTitle": {
+      "S": "Happy Day"
+    }
+  }
+}
+*/
+ 
+};
+
+
+/* 
+for detailed information visit
+site: https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/dynamodb/command/GetItemCommand/
+*/
