@@ -1,0 +1,10 @@
+import {DynamoDBClient} from "@aws-sdk/client-dynamodb"
+
+const client = new DynamoDBClient(config);
+// the config argument in DynamoDBClient are configuration for DynamoDBClient 
+// this argument is option 
+// it contains several paraments like region, requestHandler, maxAttempts etc.
+// or
+const client = new DynamoDBClient();
+
+// using this you can use dynamodb in your lambda code or in sdk environment
