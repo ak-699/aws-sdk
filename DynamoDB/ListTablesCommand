@@ -1,0 +1,35 @@
+import { DynamoDBClient, ListTablesCommand } from "@aws-sdk/client-dynamodb"
+
+const client = new DynamoDBClient();
+
+export const handler = async (event) => {
+    const input = {};
+    const command = new ListTablesCommand(input); // ListTablesCommand({})
+    const response = await client.send(command);
+
+};
+
+/* response =
+    {
+      "TableNames": [
+        "Forum",
+        "ProductCatalog",
+        "Reply",
+        "Thread"
+      ]
+    }*/
+
+/*
+const input = { // ListTablesInput
+    ExclusiveStartTableName: "STRING_VALUE",
+    Limit: Number("int"),
+  };
+  // 
+  ExclusiveStartTableName: The first table name that this operation will evaluate. Use the value that was returned for LastEvaluatedTableName in a previous operation, so that you can obtain the next page of results.
+  Limit: A maximum number of table names to return. If this parameter is not specified, the limit is 100.
+*/
+
+/* 
+for detailed information visit
+site: https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/dynamodb/command/ListTablesCommand/
+*/
